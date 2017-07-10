@@ -11,7 +11,7 @@ public abstract class Shape {
 
 	public abstract void draw(Graphics g);
 	
-	public void setColor(Graphics g, int red, int green, int blue) {
+	public void setColor(int red, int green, int blue) {
 		c = new Color(red, green, blue);
 	}
 	

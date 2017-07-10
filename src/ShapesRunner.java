@@ -17,16 +17,14 @@ public class ShapesRunner implements MouseListener, MouseMotionListener{
 	JPanel panel = new JPanel(){
 		public void paintComponent(Graphics g) {
 			for (Shape s : shapes) {
-				int red = Integer.parseInt(redVal.getText());
-				int green = Integer.parseInt(greenVal.getText());
-				int blue = Integer.parseInt(blueVal.getText());
-				s.setColor(g, red, green, blue);
 				s.draw(g);
 			}
 		}
 	};
 	JRadioButton ellipse = new JRadioButton();
 	JRadioButton rectangle = new JRadioButton();
+	JRadioButton triangle = new JRadioButton();
+	JRadioButton pentagon = new JRadioButton();
 	ButtonGroup bg = new ButtonGroup();
 	JLabel red = new JLabel();
 	JLabel green = new JLabel();
@@ -41,7 +39,7 @@ public class ShapesRunner implements MouseListener, MouseMotionListener{
 	}
 	
 	ShapesRunner() {
-		frame.setSize(500, 500);
+		frame.setSize(700, 500);
 		frame.setVisible(true);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.add(panel);
@@ -49,6 +47,8 @@ public class ShapesRunner implements MouseListener, MouseMotionListener{
 		frame.addMouseListener(this);
 		panel.add(ellipse);
 		panel.add(rectangle);
+		panel.add(triangle);
+		panel.add(pentagon);
 		panel.add(red);
 		panel.add(redVal);
 		panel.add(green);
@@ -57,8 +57,12 @@ public class ShapesRunner implements MouseListener, MouseMotionListener{
 		panel.add(blueVal);
 		ellipse.setText("ellipse");
 		rectangle.setText("rectangle");
+		triangle.setText("triangle");
+		pentagon.setText("pentagon");
 		bg.add(ellipse);
 		bg.add(rectangle);
+		bg.add(triangle);
+		bg.add(pentagon);
 		red.setText("red:");
 		green.setText("green:");
 		blue.setText("blue:");
@@ -70,6 +74,10 @@ public class ShapesRunner implements MouseListener, MouseMotionListener{
 	@Override
 	public void mouseDragged(MouseEvent e) {
 		Shape s = shapes.get(shapes.size() - 1);
+		int red = Integer.parseInt(redVal.getText());
+		int green = Integer.parseInt(greenVal.getText());
+		int blue = Integer.parseInt(blueVal.getText());
+		s.setColor(red, green, blue);
 		s.setWidth(e.getX() - s.getX());
 		s.setHeight(e.getY() - s.getY());
 		panel.repaint();
@@ -93,11 +101,21 @@ public class ShapesRunner implements MouseListener, MouseMotionListener{
 			ellipse.setX(e.getX());
 			ellipse.setY(e.getY());
 			shapes.add(ellipse);
-		} else {
+		} else if (rectangle.isSelected() == true){
 			Shape rect = new Rectangle();
 			rect.setX(e.getX());
 			rect.setY(e.getY());
 			shapes.add(rect);
+		} else if (triangle.isSelected() == true){
+			Shape triangle = new Triangle();
+			triangle.setX(e.getX());
+			triangle.setY(e.getY());
+			shapes.add(triangle);
+		} else if (pentagon.isSelected() == true) {
+			Shape pentagon = new Pentagon();
+			pentagon.setX(e.getX());
+			pentagon.setY(e.getY());
+			shapes.add(pentagon);
 		}
 	}
 
