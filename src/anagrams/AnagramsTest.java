@@ -1,6 +1,9 @@
 package anagrams;
 
 import static org.junit.Assert.*;
+
+import java.util.HashMap;
+
 import static anagrams.Anagrams.isAnagram;
 
 import org.junit.Test;
@@ -42,5 +45,22 @@ public class AnagramsTest {
 		assertTrue(isAnagram("A", "a"));
 		assertTrue(isAnagram("aA", "Aa"));
 	}
+	
+	@Test
+	public void testToHashMap() {
+		HashMap<Character, Integer> map = Anagrams.toHashMap("Hello");
+		assertNotNull(map.get('H'));
+		assertEquals(2, map.get('l').intValue());
+		assertNull(map.get('x'));
+		map = Anagrams.toHashMap("Hash");
+		assertEquals(1, map.get('h').intValue());
+	}
+	
+	@Test
+	public void testToHashMapEmpty() {
+		HashMap<Character, Integer> map = Anagrams.toHashMap(null);
+		assertTrue(map.isEmpty());
+	}
+	
 
 }
